@@ -6,17 +6,16 @@ package Falcon9;
 // It will also be used to output your data in a format that can be imported to Google sheets for analysis
 // Please follow the format carefully!
 
-public class Falcon9Tester{
+public class Falcon9Tester {
+	private static final int WIDTH = 1920;
+	private static final int HEIGHT = 1040;
 
 	public static void main(String[] args) {
-		final int WIDTH = 1920;
-		final int HEIGHT = 1040;
-
 		// Step 1: 
 		// Using your Falcon9 constructor, declare and instantiate a Falcon9 rocket object
 		// Using your setter, set deltaTime to 0.5 sec
 		Falcon9 f = new Falcon9(WIDTH/2, HEIGHT, 80, 300);
-		f.setDT(0.0001);
+		f.setDT(0.05);
 		f.setDM(398900 * (f.getDT() / 162));
 
 		
@@ -28,6 +27,13 @@ public class Falcon9Tester{
 		// For example:
 		// 0.5,540068.8271604938,1513325.4938271604,2.8020974692868936,1.4010487346434468,0.7005243673217234
 		while (f.getT() <= 162) {
+			System.out.println(f.getT() + "," + f.getM() + "," + f.getF() + "," + f.getA() + "," + f.getV() + "," + f.getH());
+			f.move();
+		}
+		f.setM(96570);
+		f.setDM(92670 * (f.getDT() / 235));
+		f.setFT(934000);
+		while (f.getT() <= 397) {
 			System.out.println(f.getT() + "," + f.getM() + "," + f.getF() + "," + f.getA() + "," + f.getV() + "," + f.getH());
 			f.move();
 		}

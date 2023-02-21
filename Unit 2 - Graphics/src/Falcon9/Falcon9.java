@@ -2,7 +2,7 @@ package Falcon9;
 
 import RocketAndLiftoff.Rocket;
 
-// import java.awt.Graphics;
+import java.awt.Graphics;
 
 public class Falcon9 extends Rocket {
     private final double G = 6.6473 * Math.pow(10, -11);
@@ -10,13 +10,16 @@ public class Falcon9 extends Rocket {
     private final double RE = 6.3781 * Math.pow(10, 6);
     private double DT;
     private double DM;
-    private final double FT = 6806000;
+    private double FT;
 
     private double m;
     private double fg;
+    private double fd;
     private double f;
     private double h;
     private double t;
+
+    private double scale;
     
     public Falcon9(double x, double y, double width, double height) {
         super(x, y, width, height);
@@ -26,11 +29,15 @@ public class Falcon9 extends Rocket {
         m = 541300;
         h = 0;
         fg = G * ((m * ME) / Math.pow(RE + h, 2));
+        fd = // help me
         f = FT - fg;
         t = 0;
 
         DT = 0.001;
         DM = 398900 * (DT / 162);
+        FT = 6806000;
+        
+        scale = 0.000951903833155;
     }
 
     public Falcon9(int x, int y, int width, int height, double m, double fg, double f, double a, double v, double h, double t, double dt) {
@@ -49,7 +56,17 @@ public class Falcon9 extends Rocket {
         this.DT = dt;
     }
 
-    public void move() {
+    public void move() { // No draw for tester
+        setM(getM() - getDM());
+        setFg(getG() * (getME() * getM()) / Math.pow(getRE() + getH(), 2));
+        setF(getFT() - getFg());
+        setA(getF() / getM());
+        setV(getV() + getA() * getDT());
+        setH(getH() + getV() * getDT());
+        setT(getT() + getDT());
+    }
+
+    public void move(int HEIGHT, Graphics g) {
         setM(getM() - getDM());
         setFg(getG() * (getME() * getM()) / Math.pow(getRE() + getH(), 2));
         setF(getFT() - getFg());
@@ -58,7 +75,9 @@ public class Falcon9 extends Rocket {
         setH(getH() + getV() * getDT());
         setT(getT() + getDT());
 
-        // draw(g);
+        setY((int)(HEIGHT - getH() * getScale()));
+
+        draw(g);
     }
 
     // Constant Getters
@@ -107,7 +126,11 @@ public class Falcon9 extends Rocket {
         return t;
     }
 
-    // Field (+DT, +DM) Setters
+    public double getScale() {
+        return scale;
+    }
+
+    // Field (+DT, +DM, +FT, +Scale) Setters
     public void setM(double m) {
         this.m = m;
     }
@@ -134,6 +157,14 @@ public class Falcon9 extends Rocket {
     
     public void setDM(double dm) {
         this.DM = dm;
+    }
+
+    public void setFT(double ft) {
+        this.FT = ft;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
     }
 
 }
