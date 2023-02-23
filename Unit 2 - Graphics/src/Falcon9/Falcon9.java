@@ -29,7 +29,7 @@ public class Falcon9 extends Rocket {
         m = 541300;
         h = 0;
         fg = G * ((m * ME) / Math.pow(RE + h, 2));
-        fd = // help me
+        fd = ((1.44766 * Math.pow(0.999859, h)) * 10.7521008569 * 0.342 * Math.pow(0, 2)) / 2;
         f = FT - fg;
         t = 0;
 
@@ -59,7 +59,8 @@ public class Falcon9 extends Rocket {
     public void move() { // No draw for tester
         setM(getM() - getDM());
         setFg(getG() * (getME() * getM()) / Math.pow(getRE() + getH(), 2));
-        setF(getFT() - getFg());
+        setFd(((1.44766 * Math.pow(0.999859, getH())) * 10.7521008569 * 0.342 * Math.pow(0, 2)) / 2);
+        setF(getFT() - getFg() - getFd());
         setA(getF() / getM());
         setV(getV() + getA() * getDT());
         setH(getH() + getV() * getDT());
@@ -69,7 +70,8 @@ public class Falcon9 extends Rocket {
     public void move(int HEIGHT, Graphics g) {
         setM(getM() - getDM());
         setFg(getG() * (getME() * getM()) / Math.pow(getRE() + getH(), 2));
-        setF(getFT() - getFg());
+        setFd(((1.44766 * Math.pow(0.999859, getH())) * 10.7521008569 * 0.342 * Math.pow(0, 2)) / 2);
+        setF(getFT() - getFg() - getFd());
         setA(getF() / getM());
         setV(getV() + getA() * getDT());
         setH(getH() + getV() * getDT());
@@ -114,6 +116,10 @@ public class Falcon9 extends Rocket {
         return fg;
     }
 
+    public double getFd() {
+        return fd;
+    }
+
     public double getF() {
         return f;
     }
@@ -137,6 +143,10 @@ public class Falcon9 extends Rocket {
 
     public void setFg(double fg) {
         this.fg = fg;
+    }
+
+    public void setFd(double fd) {
+        this.fd = fd;
     }
 
     public void setF(double f) {

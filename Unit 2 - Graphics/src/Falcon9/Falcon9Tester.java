@@ -1,3 +1,6 @@
+// Completed extensions:
+// Stage 2, Air Resistance
+
 package Falcon9;
 
 // Falcon9Tester.java
@@ -30,13 +33,13 @@ public class Falcon9Tester {
 			System.out.println(f.getT() + "," + f.getM() + "," + f.getF() + "," + f.getA() + "," + f.getV() + "," + f.getH());
 			f.move();
 		}
-		f.setM(96570);
-		f.setDM(92670 * (f.getDT() / 235));
-		f.setFT(934000);
-		while (f.getT() <= 397) {
-			System.out.println(f.getT() + "," + f.getM() + "," + f.getF() + "," + f.getA() + "," + f.getV() + "," + f.getH());
-			f.move();
-		}
+		// f.setM(96570);
+		// f.setDM(92670 * (f.getDT() / 235));
+		// f.setFT(934000);
+		// while (f.getT() <= 397) {
+		// 	System.out.println(f.getT() + "," + f.getM() + "," + f.getF() + "," + f.getA() + "," + f.getV() + "," + f.getH());
+		// 	f.move();
+		// }
 
 	}
 
